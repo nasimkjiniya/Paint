@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/section_spacing"
+    app:cardBackgroundColor="@color/paint_surface_variant"
+    app:cardCornerRadius="@dimen/card_radius"
+    app:strokeColor="@color/paint_outline"
+    app:strokeWidth="@dimen/divider_thickness">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/card_content_padding">
+
+        <TextView
+            android:id="@+id/projectTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/paint_text"
+            android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/projectMeta"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_xs"
+            android:textColor="@color/paint_outline"
+            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/projectTitle" />
+
+        <TextView
+            android:id="@+id/projectCount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_xs"
+            android:textColor="@color/paint_text"
+            android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/projectMeta" />
+
+        <TextView
+            android:id="@+id/projectUpdated"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_xs"
+            android:textColor="@color/paint_outline"
+            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/projectCount" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

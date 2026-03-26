@@ -1,0 +1,26 @@
+<resources>
+    <dimen name="divider_thickness">1dp</dimen>
+    <dimen name="space_xxs">4dp</dimen>
+    <dimen name="space_xs">8dp</dimen>
+    <dimen name="space_sm">10dp</dimen>
+    <dimen name="screen_padding">16dp</dimen>
+    <dimen name="section_spacing">12dp</dimen>
+    <dimen name="card_content_padding">14dp</dimen>
+    <dimen name="card_radius">18dp</dimen>
+    <dimen name="settings_card_padding">20dp</dimen>
+    <dimen name="icon_size">24dp</dimen>
+    <dimen name="project_card_width">220dp</dimen>
+    <dimen name="tool_button_size">48dp</dimen>
+    <dimen name="tool_card_collapsed_height">96dp</dimen>
+    <dimen name="tool_card_collapsed_width_land">112dp</dimen>
+    <dimen name="tool_card_expanded_height">280dp</dimen>
+    <dimen name="tool_card_expanded_width_land">360dp</dimen>
+    <dimen name="canvas_height">0dp</dimen>
+    <dimen name="reference_artwork_image_size">104dp</dimen>
+    <dimen name="color_swatch_size">36dp</dimen>
+    <dimen name="slider_width">0dp</dimen>
+    <dimen name="canvas_grid_step">60dp</dimen>
+    <dimen name="canvas_label_offset">12dp</dimen>
+    <dimen name="canvas_label_text_size">16sp</dimen>
+    <dimen name="default_stroke_width">12dp</dimen>
+</resources>

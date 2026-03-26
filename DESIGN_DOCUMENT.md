@@ -1,150 +1,217 @@
 # Shape Paint+ Design Document
 
-## 1) Application Overview
-**Project name:** Shape Paint+  
-**Platform:** Android (Kotlin, XML/Fragments, MVVM)  
-**Goal:** Deliver a market-ready drawing application where users create shape-based artwork, enrich it with remote visual assets, save work locally/offline, and use device hardware for advanced creation workflows.
+## Project Information
+**Project title:** Shape Paint+  
+**Platform:** Android  
+**Implementation stack:** Kotlin, Fragments, XML, MVVM  
+**Submission status date:** March 25, 2026
 
-### Problem Statement
-Beginner drawing apps are often either too limited (no persistence, no templates) or too complex for quick creative use. Shape Paint+ focuses on fast creation, reliable offline access, and a clear UX that scales from first-time users to repeat users.
+## 1. Project Overview
+Shape Paint+ is an Android drawing application designed to support quick visual creation, local project management, and simple background-assisted artwork. The application allows users to create projects, draw with geometric shapes and freehand tools, import background imagery, save work locally, and continue editing across sessions.
 
-### Target Users
-- Students and hobbyists who want quick visual sketching.
-- Users with intermittent connectivity who still need access to saved projects.
-- Users who want basic personalization, project history, and reusable templates.
+The application was designed to satisfy the key development areas required by the project rubric:
+- Application Architecture
+- UI and Layout
+- API Connectivity and Data Persistence
+- Hardware Integration
+- User-based Functionality
 
-## 2) Rubric-Aligned Feature Set
+The final product is a multi-screen Android application with a project gallery, drawing editor, settings screen, reference image search, and export summary flow.
 
-## A. Android UI/UX
-### Major Features
-- **Three+ navigable screens (Navigation Controller + explicit intent):**
-  - `GalleryFragment`: list of saved projects and remote templates.
-  - `EditorFragment`: drawing canvas and editing tools.
-  - `SettingsFragment`: preferences, theme, export options.
-  - `ExportActivity` launched via explicit intent from `EditorFragment`.
-- **Bundle-based data passing:**
-  - Project ID and mode (`new/edit/template`) passed via Safe Args bundle.
-- **ConstraintLayout-based UI:**
-  - Core screen layouts built with `ConstraintLayout` and flat hierarchy.
-- **Data collections via RecyclerView + ViewHolder:**
-  - Gallery project list and template list rendered with RecyclerView adapters.
-- **MotionLayout animation:**
-  - Tool panel expand/collapse and contextual controls animated via MotionScene.
+## 2. Problem Statement
+Many lightweight mobile drawing applications either provide only temporary sketching with no persistence, or they become overly complex for users who need a simple and direct workflow. Shape Paint+ addresses this gap by offering a structured but approachable drawing experience with local persistence, configurable editing behavior, hardware-assisted background capture, and external image search for reference material.
 
-### Minor Features
-- Adaptive layouts for phone/tablet using qualifiers.
-- Resource organization in `res/values` (`strings`, `colors`, `dimens`, `styles`), `drawable`, and `layout`.
-- Empty-state and loading-state UI for first-time and offline scenarios.
+## 3. Intended Users
+The application is intended for:
+- students learning visual composition or shape-based design
+- hobby users who want a simple drawing workspace
+- users who want to save and return to projects later
+- users who benefit from quick background reference images while drawing
 
-## B. Local and Network Data
-### Major Features
-- **Remote API connectivity (Retrofit + Moshi):**
-  - Fetch drawing template metadata and palette packs from a public REST API.
-- **Asynchronous image loading (Glide):**
-  - Load template thumbnails with placeholders and error drawables.
-- **Local persistence:**
-  - `Room` database for projects, shapes, recent templates.
-  - `DataStore` for user preferences (theme, default shape/color, grid visibility).
+## 4. Application Summary
+Shape Paint+ is organized around project-based creation. Users begin on a gallery screen, create or open a project, and then move into an editor screen where they can place shapes, draw freehand strokes, erase content, and import a background from the device camera or an online reference search. Settings are stored locally so user preferences remain available across sessions. Project content is explicitly saved by the user and restored later from local storage.
 
-### Minor Features
-- Repository layer with explicit mapping between DTOs and domain models.
-- Offline-first behavior: cached templates shown when network unavailable.
-- Coroutines + `Dispatchers.IO` for network/database operations.
+## 5. Major Features
 
-## C. Android System and Hardware Integration
-### Major Features
-- **MVVM architecture:**
-  - Fragments/Activities for UI,
-  - ViewModels for UI state + business logic,
-  - Models/entities for domain and storage.
-- **Lifecycle/event handling:**
-  - `SavedStateHandle` + `onSaveInstanceState` for draft recovery.
-  - Resume-safe behavior for app switching and orientation changes.
-  - Intent handling for import/export flows.
-- **Hardware integration:**
-  - Camera integration to capture a background image for a drawing.
-  - Runtime camera permission requested at point-of-use.
-  - Camera functionality enabled only after permission granted.
+### 5.1 Application Architecture
+- MVVM architecture with clear separation between UI, business logic, and data access
+- dedicated ViewModels for gallery, editor, settings, and reference search
+- repository layer for project persistence, settings persistence, and external API access
+- shared application container for dependency creation
 
-### Minor Features
-- Notification for export completion (optional stretch feature).
-- Haptic feedback on key drawing actions (optional stretch feature).
+### 5.2 UI and Layout
+- multiple distinct screens implemented with the Navigation Component
+- ConstraintLayout-based XML layouts for core screens
+- RecyclerView-based project and reference search lists
+- MotionLayout animation for the editor tool tray
+- portrait and landscape support for key screens
 
-## 3) Architecture Overview
-### Layers
-- **UI Layer:** Activities/Fragments, RecyclerView adapters, MotionLayout scenes.
-- **Domain Layer:** Use cases (`CreateProject`, `SaveProject`, `LoadTemplates`).
-- **Data Layer:** Retrofit service, Room DAOs, DataStore manager, repository implementations.
+### 5.3 API Connectivity and Data Persistence
+- external image search using Openverse through Retrofit and Moshi
+- Glide for asynchronous image loading
+- Room database for projects, shapes, and strokes
+- DataStore for user settings and preferences
+- local persistence across app relaunches
+
+### 5.4 Hardware Integration
+- camera capture flow for importing a background image
+- runtime camera permission request at time of use
+- camera feature accessed only after permission is granted
+
+### 5.5 User-based Functionality
+- create, open, rename, and delete projects
+- draw shapes: square, rectangle, circle, oval, and triangle
+- freehand drawing and eraser tool
+- explicit save behavior
+- unsaved-change confirmation when leaving the editor
+- export summary screen via explicit intent
+
+## 6. Minor and Support Features
+- adjustable size and brush controls
+- color selection controls
+- undo and clear actions
+- empty-state and loading-state support
+- customizable settings for artist name, grid visibility, labels, and default size
+- project summary export activity
+- background search result import from external API
+
+## 7. Screen Inventory
+
+### GalleryFragment
+Purpose:
+- provide the project entry point
+- display saved projects
+- allow creation and project access
+
+Key functions:
+- create project
+- open project
+- delete project
+- navigate to settings
+
+### EditorFragment
+Purpose:
+- provide the main drawing workspace
+
+Key functions:
+- place geometric shapes
+- draw freehand strokes
+- erase content
+- change color and sizing controls
+- import background from camera
+- open background/reference search
+- save, rename, delete, and export
+- warn user before leaving with unsaved changes
+
+### SettingsFragment
+Purpose:
+- manage persistent user preferences
+
+Key functions:
+- update artist name
+- toggle grid visibility
+- toggle label preference
+- set default size
+
+### ReferenceSearchFragment
+Purpose:
+- provide external image search for background/reference selection
+
+Key functions:
+- search Openverse
+- display remote thumbnails with Glide
+- import selected image as project background
+
+### ExportActivity
+Purpose:
+- display project metadata passed by explicit intent
+
+Key functions:
+- show summary details
+- share summary text
+
+## 8. Technical Architecture Overview
+
+### UI Layer
+The UI layer is composed of Fragments and one Activity. Each screen renders ViewModel state and forwards user actions into business logic. RecyclerView adapters are used for project listings and remote reference results.
+
+### ViewModel Layer
+ViewModels manage screen state, business actions, and repository interaction. They expose observable state to the UI and handle user-driven events such as saving, searching, importing, and deleting.
+
+### Data Layer
+The data layer contains:
+- Room entities, DAOs, and the application database
+- DataStore-backed settings persistence
+- Retrofit service interfaces and response models
+- repository implementations that coordinate persistence and API calls
 
 ### Data Flow
-1. UI action is emitted in Fragment.
-2. ViewModel processes action and calls use case/repository.
-3. Repository resolves from local cache and/or network.
-4. ViewModel publishes observable state (LiveData/StateFlow).
-5. UI renders state and one-time events (navigation/snackbar/dialog).
+1. A user action begins in a Fragment.
+2. The Fragment sends that action to a ViewModel.
+3. The ViewModel updates in-memory state or delegates to a repository.
+4. The repository performs local storage or network operations.
+5. The ViewModel publishes updated state back to the UI.
 
-## 4) Screen Inventory
-- **GalleryFragment**
-  - RecyclerView of local projects.
-  - RecyclerView section of remote templates with Glide thumbnails.
-  - FAB to create new project.
-- **EditorFragment**
-  - Canvas area for shape placement/editing.
-  - Tool controls (shape, color, size, undo/redo).
-  - MotionLayout animated tool tray.
-  - Buttons for Save, Import from Camera, Export.
-- **SettingsFragment**
-  - Theme selection, default tool options, cache controls.
-  - DataStore-backed preferences.
-- **ExportActivity**
-  - Receives project ID via explicit intent extras.
-  - Generates share/export output and result status.
+## 9. Milestone Schedule
+Project timeline: **January 6, 2026 through March 25, 2026**
 
-## 5) Milestone Schedule and Delivery Targets
-Assumed project window: **March 30, 2026 to May 24, 2026**
-
-| Milestone | Dates | Scope | Exit Criteria |
+| Milestone | Dates | Planned Delivery | Expected Outcome |
 |---|---|---|---|
-| M1: Design + Foundation | Mar 30 - Apr 5, 2026 | Finalize architecture, nav graph, data models, screen wireframes, repository contracts | Design doc approved; project skeleton compiles; navigation scaffolding in place |
-| M2: MVP Proof of Concept | Apr 6 - Apr 19, 2026 | Implement Gallery + Editor + Settings shells, basic drawing flow, ViewModel state, RecyclerView lists, basic Room save/load | App has 3+ screens; user can create and save/load simple projects; nav and bundles working |
-| M3: Core Feature Expansion | Apr 20 - May 10, 2026 | Retrofit API integration, Glide async loading, robust local caching, orientation/process recovery, explicit intent export flow | Network templates load with placeholder/error states; offline cache works; lifecycle recovery validated |
-| M4: Release Readiness + Polish | May 11 - May 24, 2026 | MotionLayout animations, camera hardware integration + permissions, accessibility polish, QA/regression fixes | MotionLayout scene active; camera import works with runtime permission; release candidate build stable |
+| Milestone 1: Design and Foundation | January 6 - January 19, 2026 | Finalize concept, architecture, navigation structure, and base screen layouts | Design document completed, project structure established, app skeleton compiling |
+| Milestone 2: Minimal Viable Product | January 20 - February 9, 2026 | Implement gallery, editor, settings, and basic local project workflow | User can create, open, edit, and save a simple project |
+| Milestone 3: Core Feature Expansion | February 10 - March 2, 2026 | Add freehand drawing, eraser, deletion, rename flow, export path, and camera integration | Core editing and project management features are complete and stable |
+| Milestone 4: API Integration and Final Refinement | March 3 - March 25, 2026 | Add Openverse search, Glide integration, unsaved-change protection, and final layout polish | Application is submission-ready by March 25, 2026 |
 
-## 6) Rubric Traceability Matrix
+## 10. Rubric Alignment
 
-| Rubric Requirement | Planned Implementation in Shape Paint+ | Evidence for Submission |
-|---|---|---|
-| 3+ screens with navigation | Gallery, Editor, Settings via Navigation Controller | Nav graph XML + demo video |
-| Explicit intent usage | Editor launches ExportActivity with project bundle | Intent code + exported result flow |
-| Data passed between screens | Safe Args/Bundle: projectId, templateId, mode | Fragment args classes + logs/screenshots |
-| ConstraintLayout usage | Primary XML layouts built with ConstraintLayout; constrained IDs on each view | Layout XML files |
-| Data collections with ViewHolder | RecyclerView adapters for projects/templates | Adapter/ViewHolder classes |
-| MotionLayout feature | Tool tray transition in Editor MotionScene | MotionScene XML + screen capture |
-| External API connectivity | Retrofit + Moshi for templates/palettes | Service interface + repository tests |
-| Async network + image loading | Coroutines + Glide placeholders/error states | Loading/error UI states video |
-| Local persistence across sessions | Room entities/DAO + DataStore preferences | DB schema + persistence demo |
-| MVVM architecture | Fragment/Activity UI, ViewModel logic, model/domain separation | Package structure + architecture diagram |
-| Lifecycle/system event handling | SavedStateHandle, onSaveInstanceState, intent and permission result handling | Orientation/process recreation test notes |
-| Hardware feature + permissions | Camera capture background import with runtime permission | Permission flow demo + feature video |
+| Rubric Area | Shape Paint+ Implementation |
+|---|---|
+| Application Architecture | MVVM structure, repositories, ViewModels, Room, DataStore, clear separation of concerns |
+| UI and Layout | Multiple screens, Navigation Component, ConstraintLayout, RecyclerView, MotionLayout, portrait/landscape layouts |
+| API Connectivity and Data Persistence | Openverse API via Retrofit, Glide image loading, Room persistence, DataStore settings |
+| Hardware Integration | Camera integration with runtime permission request |
+| User-based Functionality | Project management, drawing tools, background import, export flow, unsaved-change confirmation |
 
-## 7) Testing and Quality Plan
-- Unit tests for ViewModels, repositories, and model mapping.
-- DAO tests for Room read/write and conflict behavior.
-- Instrumentation tests for navigation and key UI flows.
-- Manual test matrix:
-  - Online/offline transitions,
-  - orientation changes during editing,
-  - permission grant/deny for camera,
-  - cold start restoration of last project.
+## 11. Requirement Traceability
 
-## 8) Submission Package Checklist
-- Application source code.
-- Buildable Android project and release artifact (APK/AAB as required).
-- This design document with milestone schedule.
-- Rubric traceability section (Section 6) showing where each criterion is met.
-- Short demo video/screenshots showing:
-  - multi-screen navigation,
-  - MotionLayout animation,
-  - API data loading with placeholders,
-  - local persistence after relaunch,
-  - camera integration with permission handling.
+| Submission Requirement | Implementation Evidence |
+|---|---|
+| At least three screens with navigation | Gallery, Editor, Settings, Reference Search |
+| Explicit intent usage | ExportActivity launched from editor |
+| Bundle-based data passing | Project ID passed through navigation arguments |
+| RecyclerView and ViewHolder usage | Saved project list and reference result list |
+| MotionLayout usage | Animated expand/collapse editor tool tray |
+| External data source usage | Openverse image search integration |
+| Async remote image loading | Glide thumbnail rendering |
+| Local device persistence | Room database and DataStore |
+| MVVM usage | ViewModels for UI logic and repositories for data access |
+| Lifecycle and system event handling | SavedStateHandle, explicit save flow, unsaved-change back confirmation |
+| Hardware functionality | Camera capture with runtime permission handling |
+
+## 12. Testing and Verification Plan
+Testing for the application focuses on feature coverage and rubric evidence.
+
+### Build Verification
+- Gradle debug build verification
+
+### Manual Verification Areas
+- project creation and opening
+- project save and reload
+- rename and delete behavior
+- freehand and eraser behavior
+- unsaved-change prompt on back navigation
+- camera permission grant and deny flows
+- Openverse search and background import
+- portrait and landscape layout behavior
+- saved-project restoration after app restart
+
+## 13. Submission Readiness Statement
+As of March 25, 2026, Shape Paint+ includes the core technical and functional areas required by the rubric:
+- structured Android architecture
+- multi-screen UI and navigation
+- external API integration
+- local persistence
+- hardware integration
+- user-facing project workflows
+
+The application is positioned as a rubric-aligned final submission with supporting documentation, milestone planning, and feature traceability.

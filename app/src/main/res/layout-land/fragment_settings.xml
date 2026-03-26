@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/paint_surface"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/screen_padding">
+
+        <TextView
+            android:id="@+id/settingsTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_title"
+            android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
+            app:layout_constraintEnd_toStartOf="@id/settingsCard"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/settingsSubtitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_xs"
+            android:text="@string/settings_subtitle"
+            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+            app:layout_constraintEnd_toStartOf="@id/settingsCard"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/settingsTitle" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/settingsCard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/paint_surface_variant"
+            app:cardCornerRadius="@dimen/card_radius"
+            app:strokeColor="@color/paint_outline"
+            app:strokeWidth="@dimen/divider_thickness"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/formGuideline"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/settings_card_padding">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/artistNameLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/artistNameInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/artist_name" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.materialswitch.MaterialSwitch
+                    android:id="@+id/showGridSwitch"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/screen_padding"
+                    android:text="@string/show_grid"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/artistNameLayout" />
+
+                <com.google.android.material.materialswitch.MaterialSwitch
+                    android:id="@+id/showLabelsSwitch"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/section_spacing"
+                    android:text="@string/show_labels"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/showGridSwitch" />
+
+                <TextView
+                    android:id="@+id/defaultSizeLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/screen_padding"
+                    android:text="@string/default_size"
+                    app:layout_constraintEnd_toStartOf="@id/defaultSizeValue"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/showLabelsSwitch" />
+
+                <TextView
+                    android:id="@+id/defaultSizeValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBaseline_toBaselineOf="@id/defaultSizeLabel"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/defaultSizeLabel" />
+
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/defaultSizeSlider"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_xs"
+                    android:valueFrom="@integer/size_slider_min"
+                    android:valueTo="@integer/size_slider_max"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/defaultSizeLabel" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/saveSettingsButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/icon_size"
+                    android:text="@string/save_settings"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/defaultSizeSlider" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/formGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.42" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

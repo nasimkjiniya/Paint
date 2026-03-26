@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/motionRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/screen_padding"
+    android:background="@color/paint_surface"
+    app:layoutDescription="@xml/scene_editor_land">
+
+    <TextView
+        android:id="@+id/editorTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
+        android:textColor="@color/paint_text" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/toolsToggleButton"
+        style="@style/Widget.Material3.Button.OutlinedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:minWidth="0dp"
+        android:text="@string/collapse_tools" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/overflowButton"
+        style="@style/Widget.Material3.Button.OutlinedButton"
+        android:layout_width="@dimen/tool_button_size"
+        android:layout_height="@dimen/tool_button_size"
+        android:contentDescription="@string/editor_more_options"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
+        app:icon="@drawable/ic_more_vert_24"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp" />
+
+    <TextView
+        android:id="@+id/editorSubtitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/tap_hint"
+        android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/shapeCountChip"
+        style="@style/Widget.Material3.Chip.Assist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/loading" />
+
+    <FrameLayout
+        android:id="@+id/canvasFrame"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_canvas">
+
+        <com.example.shapepaint.ui.editor.widget.DrawingCanvasView
+            android:id="@+id/drawingCanvas"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/emptyCanvasLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/editor_empty"
+            android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
+    </FrameLayout>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/toolCard"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:cardBackgroundColor="@color/paint_surface_variant"
+        app:cardCornerRadius="@dimen/card_radius">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/screen_padding">
+
+                <TextView
+                    android:id="@+id/toolsLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tools"
+                    android:textAppearance="@style/TextAppearance.Material3.TitleMedium" />
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_xs"
+                    android:scrollbars="none">
+
+                    <com.google.android.material.button.MaterialButtonToggleGroup
+                        android:id="@+id/shapeGroup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:selectionRequired="true"
+                        app:singleSelection="true">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/shapeSquareButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/square" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/shapeRectangleButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/rectangle" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/shapeCircleButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/circle" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/shapeOvalButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/oval" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/shapeTriangleButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/triangle" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/shapeFreehandButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/freehand" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/shapeEraserButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/eraser" />
+                    </com.google.android.material.button.MaterialButtonToggleGroup>
+                </HorizontalScrollView>
+
+                <TextView
+                    android:id="@+id/sizeLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/screen_padding"
+                    android:text="@string/size" />
+
+                <TextView
+                    android:id="@+id/sizeValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/sizeSlider"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:valueFrom="@integer/size_slider_min"
+                    android:valueTo="@integer/size_slider_max" />
+
+                <TextView
+                    android:id="@+id/widthLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/screen_padding"
+                    android:text="@string/width" />
+
+                <TextView
+                    android:id="@+id/widthValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/widthSlider"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:valueFrom="@integer/size_slider_min"
+                    android:valueTo="@integer/rect_slider_max" />
+
+                <TextView
+                    android:id="@+id/heightLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/screen_padding"
+                    android:text="@string/height" />
+
+                <TextView
+                    android:id="@+id/heightValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/heightSlider"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:valueFrom="@integer/size_slider_min"
+                    android:valueTo="@integer/rect_slider_max" />
+
+                <TextView
+                    android:id="@+id/strokeLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/screen_padding"
+                    android:text="@string/brush_size"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/strokeValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" />
+
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/strokeSlider"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:value="@integer/stroke_slider_default"
+                    android:valueFrom="@integer/stroke_slider_min"
+                    android:valueTo="@integer/stroke_slider_max"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/colorLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/screen_padding"
+                    android:text="@string/fill_color" />
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_xs"
+                    android:scrollbars="none">
+
+                    <com.google.android.material.button.MaterialButtonToggleGroup
+                        android:id="@+id/colorGroup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:selectionRequired="true"
+                        app:singleSelection="true">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/colorRedButton"
+                            style="@style/Widget.Material3.Button.TonalButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/red" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/colorGreenButton"
+                            style="@style/Widget.Material3.Button.TonalButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/green" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/colorBlueButton"
+                            style="@style/Widget.Material3.Button.TonalButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/blue" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/colorOrangeButton"
+                            style="@style/Widget.Material3.Button.TonalButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/orange" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/colorPurpleButton"
+                            style="@style/Widget.Material3.Button.TonalButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/purple" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/colorCharcoalButton"
+                            style="@style/Widget.Material3.Button.TonalButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/charcoal" />
+                    </com.google.android.material.button.MaterialButtonToggleGroup>
+                </HorizontalScrollView>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/actionRow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/screen_padding">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/undoButton"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/undo" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/clearButton"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/clear" />
+
+                    <androidx.constraintlayout.helper.widget.Flow
+                        android:id="@+id/actionRowFlow"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:constraint_referenced_ids="undoButton,clearButton"
+                        app:flow_horizontalGap="@dimen/space_xs"
+                        app:flow_horizontalStyle="packed"
+                        app:flow_verticalGap="@dimen/space_xs"
+                        app:flow_wrapMode="aligned"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/actionRowSecondary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/section_spacing">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/cameraButton"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/camera_background" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/referenceButton"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/reference_button" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/exportButton"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/export" />
+
+                    <androidx.constraintlayout.helper.widget.Flow
+                        android:id="@+id/actionRowSecondaryFlow"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:constraint_referenced_ids="cameraButton,referenceButton,exportButton"
+                        app:flow_horizontalGap="@dimen/space_xs"
+                        app:flow_horizontalStyle="packed"
+                        app:flow_verticalGap="@dimen/space_xs"
+                        app:flow_wrapMode="aligned"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+        </ScrollView>
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

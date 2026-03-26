@@ -1,0 +1,12 @@
+<resources>
+    <integer name="project_title_max_length">30</integer>
+    <integer name="default_shape_size">140</integer>
+    <integer name="size_slider_min">60</integer>
+    <integer name="size_slider_max">300</integer>
+    <integer name="rect_slider_max">320</integer>
+    <integer name="stroke_slider_default">12</integer>
+    <integer name="stroke_slider_min">4</integer>
+    <integer name="stroke_slider_max">32</integer>
+    <integer name="editor_motion_duration">300</integer>
+    <integer name="reference_max_results">18</integer>
+</resources>

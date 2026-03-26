@@ -1,0 +1,17 @@
+<resources>
+    <color name="paint_primary">#143642</color>
+    <color name="paint_on_primary">#FFFFFF</color>
+    <color name="paint_secondary">#F4B942</color>
+    <color name="paint_surface">#F8F4EC</color>
+    <color name="paint_surface_variant">#E4DDD0</color>
+    <color name="paint_outline">#7A746A</color>
+    <color name="paint_text">#1B1B1B</color>
+    <color name="paint_canvas">#FAFBFD</color>
+    <color name="paint_grid">#1E000000</color>
+    <color name="paint_red">#D1495B</color>
+    <color name="paint_blue">#2E86AB</color>
+    <color name="paint_green">#4F772D</color>
+    <color name="paint_orange">#F28F3B</color>
+    <color name="paint_purple">#7B5EA7</color>
+    <color name="paint_charcoal">#3D405B</color>
+</resources>

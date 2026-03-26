@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/galleryFragment">
+
+    <fragment
+        android:id="@+id/galleryFragment"
+        android:name="com.example.shapepaint.ui.gallery.GalleryFragment"
+        android:label="@string/gallery_title">
+        <action
+            android:id="@+id/action_galleryFragment_to_editorFragment"
+            app:destination="@id/editorFragment" />
+        <action
+            android:id="@+id/action_galleryFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/editorFragment"
+        android:name="com.example.shapepaint.ui.editor.EditorFragment"
+        android:label="@string/editor_title">
+        <action
+            android:id="@+id/action_editorFragment_to_referenceSearchFragment"
+            app:destination="@id/referenceSearchFragment" />
+        <argument
+            android:name="projectId"
+            app:argType="long"
+            android:defaultValue="-1L" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/referenceSearchFragment"
+        android:name="com.example.shapepaint.ui.reference.ReferenceSearchFragment"
+        android:label="@string/reference_title">
+        <argument
+            android:name="projectId"
+            app:argType="long"
+            android:defaultValue="-1L" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.shapepaint.ui.settings.SettingsFragment"
+        android:label="@string/settings_title" />
+
+</navigation>

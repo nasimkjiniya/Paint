@@ -1,0 +1,17 @@
+<resources>
+    <style name="Theme.ShapePaint" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/paint_primary</item>
+        <item name="colorOnPrimary">@color/paint_on_primary</item>
+        <item name="colorSecondary">@color/paint_secondary</item>
+        <item name="colorSurface">@color/paint_surface</item>
+        <item name="colorOnSurface">@color/paint_text</item>
+        <item name="colorSurfaceVariant">@color/paint_surface_variant</item>
+        <item name="colorOnSurfaceVariant">@color/paint_outline</item>
+        <item name="colorOutline">@color/paint_outline</item>
+        <item name="android:colorBackground">@color/paint_surface</item>
+        <item name="android:statusBarColor">@color/paint_surface</item>
+        <item name="android:navigationBarColor">@color/paint_surface</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
+    </style>
+</resources>
